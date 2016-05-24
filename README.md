@@ -16,6 +16,8 @@
 *       go get github.com/shotdog/quartz
 
 *       go get  github.com/go-sql-driver/mysql
+*       init db  scheduler.sql
+*       modify conf/app.conf -->database config
 
 
 #### run
