@@ -46,9 +46,10 @@
 ![image](https://github.com/shotdog/scheduler/raw/master/screenshot/7.png)
 
 #### 5、Protocol
-//TODO
+* see [invoker.go](https://github.com/shotdog/scheduler/blob/master/invoker/invoker.go)
+		
+		 
 
-  
 
 
 
