@@ -1,0 +1,162 @@
+<div class="container">
+
+
+    <div class="page-header">
+        <h1>
+            <small>任务执行信息</small>
+        </h1>
+    </div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form id="searchForm" action="/jobsnapshot/list" method="post"
+                  class="navbar-form navbar-left form-inline" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" name="Name" value="{{.name}}">
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Grop" name="Group" value="{{.group}}">
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                    <select id="status" name="Status" class="form-control">
+                        <option value="">
+                            All Status
+                        </option>
+                        <option value="INIT" {{if eq "INIT" .status }} selected {{end}}>
+                        INIT
+                        </option>
+                        <option value="INVOKING" {{if eq  "INVOKING" .status }} selected {{end}}>
+                        INVOKING
+                        </option>
+                        <option value="EXECUTING" {{if eq "EXECUTING" .status }} selected {{end}}>
+                        EXECUTING
+                        </option>
+                        <option value="COMPLETED" {{if eq  "COMPLETED" .status }} selected {{end}}>
+                        COMPLETED
+                        </option>
+                        <option value="ERROR" {{if eq "ERROR" .status }} selected {{end}}>
+                        ERROR
+                        </option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-default">Search</button>
+                <button type="button" id="cleanOneWeekBtn" style="margin-left: 100px;" class="btn btn-info">清理一周前的数据
+                </button>
+                <button type="button" id="cleanOneMonthBtn" style="margin-left: 50px;" class="btn btn-info">清理一个月前的数据
+                </button>
+            </form>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <h4>
+        <small>如果没有查询条件,只会显示最近100条记录.</small>
+    </h4>
+
+
+    <table class="table table-condensed table-bordered table-striped" style="text-align:center">
+        <thead>
+        <tr style="text-align:center">
+            <th style="text-align:center">
+                ID
+            </th>
+            <th style="text-align:center">
+                任务名称
+            </th>
+            <th style="text-align:center">
+                任务分组
+            </th>
+            <th style="text-align:center">
+                状态
+            </th>
+            <th style="text-align:center">
+                IP
+            </th>
+            <th style="text-align:center">
+                URL
+            </th>
+            <th style="text-align:center">
+                任务耗时(秒)
+            </th>
+            <th style="text-align:center">
+                创建时间
+            </th>
+            <th style="text-align:center">
+                最后变更时间
+            </th>
+            <th style="width:55px;text-align:center">
+                停止
+            </th>
+            <th style="width:55px;text-align:center">
+                详情
+            </th>
+        </tr>
+        </thead>
+        {{range $index,$job := .jobSnapshotList}}
+        <tr>
+            <td>
+                {{ $job.Id }}
+            </td>
+            <td>
+                {{ $job.Name }}
+            </td>
+            <td>
+                {{ $job.Group }}
+            </td>
+            <td {{if eq "ERROR" $job.Status }} style="background-color:#FF8888"
+
+            {{else if eq "EXECUTING" $job.Status}}
+                 style="background-color:#99FF99"
+            {{end}}>
+            {{$job.Status}}
+            </td>
+            <td>
+                {{$job.Ip}}
+            </td>
+            <td>
+                {{$job.Url}}
+            </td>
+            <td>
+                {{$job.TimeConsume}}
+            </td>
+            <td>
+                {{dateformat $job.CreateTime "2006-01-02 15:04:05" }}
+            </td>
+            <td>
+                {{dateformat $job.ModifyTime "2006-01-02 15:04:05" }}
+            </td>
+            <td align="center">
+
+                <button type="stopButton" class="btn btn-default btn" value="" onclick="confirmStop()">
+                    <span class="glyphicon glyphicon-stop"></span>
+                </button>
+
+                <p class="glyphicon glyphicon-cloud-download" style="padding-top: 4px"></p>
+
+            </td>
+
+            <td>
+                <a href="/jobsnapshot/info?Id={{$job.Id}}">
+                    <button id="viewBtn" type="button" class="btn btn-default btn" onclick="view()">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </button>
+                </a>
+            </td>
+        </tr>
+
+        {{else}}
+
+        <tr>
+
+            <td colspan="11">暂时没有数据...</td>
+        </tr>
+
+        {{end}}
+    </table>
+
+
+</div>
