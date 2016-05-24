@@ -8,14 +8,13 @@
 #### 2、install  
   
  
-
-######    get beego 
+ 
 *        go get github.com/astaxie/beego
-#####    get scheduler
+
 *        go get github.com/shotdog/scheduler
-#####   get quartz
+
 *       go get github.com/shotdog/quartz
-##### get mysql driver for golang
+
 *       go get  github.com/go-sql-driver/mysql
 
 
@@ -26,3 +25,16 @@
 *       cd scheduler
 *       go build main.go
 *       ./main
+
+
+  
+
+
+
+
+
+ 
+
+ 
+
+
