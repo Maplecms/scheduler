@@ -20,7 +20,7 @@
 *       modify conf/app.conf -->database config
 
 
-#### run
+#### 3、run
 
 *       cd $GOPATH
 *       cd src
