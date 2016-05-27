@@ -4,11 +4,11 @@
 * install golang env
 
   https://github.com/golang/go
-  
+
 #### 2、install  
-  
- 
- 
+
+
+
 *        go get github.com/astaxie/beego
 
 *        go get github.com/shotdog/scheduler
@@ -47,16 +47,11 @@
 
 #### 5、Protocol
 * see [invoker.go](https://github.com/shotdog/scheduler/blob/master/invoker/invoker.go)
-		
-		 
 
+#### 6、Client Test
 
+* see [scheduler-client](https://github.com/shotdog/scheduler-client)
 
-
-
-
- 
-
- 
-
-
+   * cd scheduler-client
+   * go build main.go
+   * ./main
